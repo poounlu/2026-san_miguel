@@ -21,4 +21,12 @@ public class TableroControl {
     public ArrayList<Reactor> getReactores(){
         return this.reactores;
     }
+
+    @Override
+    public String toString() {
+        return "TableroControl{" +
+                "nombrePlanta='" + nombrePlanta + '\'' +
+                ", reactores=" + reactores +
+                '}';
+    }
 }

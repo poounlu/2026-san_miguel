@@ -18,8 +18,8 @@ public class Viaje {
         return this.motor.calcularConsumo(this.km);
     }
 
-    public static double calcularNafta () {
-        return motor.calcularConsumo(motor.km);
-    }
+//    public static double calcularNafta () {
+//        return motor.calcularConsumo(motor.km);
+//    }
 
 }

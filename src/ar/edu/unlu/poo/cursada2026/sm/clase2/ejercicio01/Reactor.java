@@ -4,7 +4,7 @@ public class Reactor {
     // atributos del objeto
     private String codigo;
     private Double temperaturaActual;
-    private boolean estadoAlerta;
+    private Boolean estadoAlerta;
 
     // atributos de la clase
     private static int totalAlertas = 0;
@@ -27,7 +27,7 @@ public class Reactor {
         if(nuevaTemperatura > limiteTemperatura){
             if(this.estadoAlerta == false){
                 this.estadoAlerta = true;
-                totalAlertas ++;
+                totalAlertas++;
             }
             throw new TemperaturaCriticaException("ALERTA CRITICA - REACTOR " + this.codigo + "SUPERO LIMITE DE SEGURIDAD DE " + limiteTemperatura + "°C");
         }
@@ -55,5 +55,13 @@ public class Reactor {
         limiteTemperatura = limite;
     }
 
+    @Override
+    public String toString() {
+        return "Reactor{" +
+                "codigo='" + codigo + '\'' +
+                ", temperaturaActual=" + temperaturaActual +
+                ", estadoAlerta=" + estadoAlerta +
+                '}';
+    }
 }
 
