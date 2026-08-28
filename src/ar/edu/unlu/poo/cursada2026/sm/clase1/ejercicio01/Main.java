@@ -7,5 +7,10 @@ public class Main {
 
         double combustibleNecesario = viaje.calcularCombustibleNecesario();
         System.out.println(combustibleNecesario);
+
+        double nafta = Viaje.calcularNafta();
+
+        // objeto.method -> method de instancia
+        // clase.methdo -> method de clase - static
     }
 }
