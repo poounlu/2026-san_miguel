@@ -1,6 +1,7 @@
 package ar.edu.unlu.poo.cursada2026.sm.clase4.ejercicio1;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,6 +30,9 @@ public class Catalogo {
                 .toList();
     }
 
-    /*public Optional<Artefacto> buscarMasCaro(String artefacto) {
-    }*/
+    public Optional<Artefacto> buscarMasCaro(String marca) {
+        return this.artefactos.stream()
+                .filter( artefacto -> artefacto.getMarca().equals(marca))
+                .max(Comparator.comparingDouble(artefacto -> artefacto.getPrecio()));
+    }
 }
