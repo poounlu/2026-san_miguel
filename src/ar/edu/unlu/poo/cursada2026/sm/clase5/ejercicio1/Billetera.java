@@ -11,28 +11,41 @@ public class Billetera {
     }
 
     void abrirCuenta(String divisa){
-        if(this.cuentas.containsKey(divisa)){
-            throw new CuentaDuplicadaException("La divisa ya existe:" + divisa);
+        String divisaNormalizada = normalizarDivisa(divisa);
+        if (this.cuentas.containsKey(divisaNormalizada)) {
+            throw new CuentaDuplicadaException("Ya existe una cuenta para la divisa: " + divisaNormalizada);
         }
-        String divisaNormalizada = divisa.trim().toUpperCase();
         this.cuentas.put(divisaNormalizada, new Cuenta(divisaNormalizada));
     }
 
-    double getSaldo(String moneda){
-        return this.cuentas.get(moneda).getSaldo();
+    double getSaldo(String divisa){
+        String divisaNormalizada = normalizarDivisa(divisa);
+        if(!this.cuentas.containsKey(divisaNormalizada)){
+            throw new RuntimeException("La divisa no existe: " + divisa);
+        }
+        return this.cuentas.get(divisaNormalizada).getSaldo();
     }
 
     public void depositar(String divisa, double monto) {
-        if(!this.cuentas.containsKey(divisa)){
+        String divisaNormalizada = normalizarDivisa(divisa);
+        if(!this.cuentas.containsKey(divisaNormalizada)){
             throw new RuntimeException("La divisa no existe: " + divisa);
         }
         this.cuentas.get(divisa).depositar(monto);
     }
 
     public void extraer(String divisa, double monto) {
-        if(!this.cuentas.containsKey(divisa)){
+        String divisaNormalizada = normalizarDivisa(divisa);
+        if(!this.cuentas.containsKey(divisaNormalizada)){
             throw new RuntimeException("La divisa no existe: " + divisa);
         }
         this.cuentas.get(divisa).extraer(monto);
+    }
+
+    private String normalizarDivisa(String divisa) {
+        if (divisa == null || divisa.trim().isEmpty()) {
+            throw new IllegalArgumentException("La divisa especificada es inválida.");
+        }
+        return divisa.trim().toUpperCase();
     }
 }
