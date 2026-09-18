@@ -8,4 +8,26 @@ public class Cuenta {
         this.divisa = divisa;
         this.saldo = 0.0;
     }
+
+
+    public double getSaldo() {
+        return this.saldo;
+    }
+
+    public void depositar(double monto) {
+        if(monto <= 0){
+            throw new IllegalArgumentException("El monto NO puede ser negativo o cero: " + monto);
+        }
+        this.saldo += monto;
+    }
+
+    public void extraer(double monto) {
+        if(monto <= 0) {
+            throw new IllegalArgumentException("El monto NO puede ser negativo o cero: " + monto);
+        }
+        if((this.saldo - monto) < 0){
+            throw new SaldoInsuficienteException("El saldo es insuficiente");
+        }
+        this.saldo = this.saldo - monto;
+    }
 }

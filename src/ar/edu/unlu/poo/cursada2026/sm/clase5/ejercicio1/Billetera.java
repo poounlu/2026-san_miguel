@@ -10,11 +10,29 @@ public class Billetera {
         cuentas = new HashMap<>();
     }
 
-    void abrirCuenta(String moneda){
-
+    void abrirCuenta(String divisa){
+        if(this.cuentas.containsKey(divisa)){
+            throw new CuentaDuplicadaException("La divisa ya existe:" + divisa);
+        }
+        String divisaNormalizada = divisa.trim().toUpperCase();
+        this.cuentas.put(divisaNormalizada, new Cuenta(divisaNormalizada));
     }
 
     double getSaldo(String moneda){
-        return 0.0;
+        return this.cuentas.get(moneda).getSaldo();
+    }
+
+    public void depositar(String divisa, double monto) {
+        if(!this.cuentas.containsKey(divisa)){
+            throw new RuntimeException("La divisa no existe: " + divisa);
+        }
+        this.cuentas.get(divisa).depositar(monto);
+    }
+
+    public void extraer(String divisa, double monto) {
+        if(!this.cuentas.containsKey(divisa)){
+            throw new RuntimeException("La divisa no existe: " + divisa);
+        }
+        this.cuentas.get(divisa).extraer(monto);
     }
 }
